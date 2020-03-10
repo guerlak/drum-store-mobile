@@ -1,0 +1,66 @@
+{
+    "stock": [
+        {
+            "id": 1,
+            "amount": 3
+        },
+        {
+            "id": 2,
+            "amount": 5
+        },
+        {
+            "id": 3,
+            "amount": 2
+        },
+        {
+            "id": 4,
+            "amount": 1
+        },
+        {
+            "id": 5,
+            "amount": 5
+        },
+        {
+            "id": 6,
+            "amount": 10
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "title": "Roland Electronic Drum",
+            "price": 7079.9,
+            "image": "https://static.roland.com/promos/vad/images/overview-vad.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Gretsch Drums",
+            "price": 1839.9,
+            "image": "https://sc1.musik-produktiv.com/pic-010112734xl/gretsch-drums-renown-maple-18-gloss-natural.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Snare Perfect Wood",
+            "price": 719.9,
+            "image": "https://www.drumcenternh.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/c/_/c_c-aged-copper-over-steel-snare-drum-14x5-1.jpg"
+        },
+        {
+            "id": 5,
+            "title": "Sonors Drum Special",
+            "price": 3039.9,
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTbHg1nK4h7w552T4s51-36CMRE6L5gtAXN8V3ZtyyQ0Y53N1BR"
+        },
+        {
+            "id": 6,
+            "title": "RMV Concept",
+            "price": 1219.9,
+            "image": "https://http2.mlstatic.com/bateria-rmv-concept-jequitiba-natural-satin-20810121-D_NQ_NP_684498-MLB27849324804_072018-O.webp"
+        },
+        {
+            "id": 4,
+            "title": "RMV New Concept",
+            "price": 1979.9,
+            "image": "https://http2.mlstatic.com/bateria-rmv-new-concept-D_NQ_NP_979258-MLB26102864322_092017-F.jpg"
+        }
+    ]
+}
