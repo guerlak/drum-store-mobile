@@ -10,7 +10,16 @@ export const Container = styled.View`
     color: #fff;
 `;
 
-export const Cart = styled.View``;
+export const Cart = styled.View`
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 40px;
+`;
+export const Number = styled.Text`
+    color: #ccc;
+`;
+
 export const TitleLogo = styled.Text`
     color: #fff;
 `;

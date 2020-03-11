@@ -12,6 +12,10 @@ import {
     TextBtn,
 } from './style';
 
+const handleOrder = () => {
+    console.log('Order done!');
+};
+
 function Cart(props) {
     const {title, image, formatedPrice} = props.route.params;
     console.log(image);
@@ -27,7 +31,7 @@ function Cart(props) {
             </Header>
             <Quantity></Quantity>
             <Total></Total>
-            <OrderBtn>
+            <OrderBtn onPress={handleOrder}>
                 <TextBtn>Finalizar Pedido</TextBtn>
             </OrderBtn>
         </Container>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {View, Text} from 'react-native';
 import api from '../../services/api';
 import {formatPrice} from '../../util/format';
@@ -12,43 +13,45 @@ class Home extends Component {
 
     async componentDidMount() {
         try {
-            const response = await api.get('');
+            const response = await api.get('/5e67121dff85de370f672ccd');
 
             // To avoid run the function formatPrice inside component rendering
             const data = response.data.products.map(prod => ({
                 ...prod,
                 formatedPrice: formatPrice(prod.price),
             }));
-
             this.setState({products: data});
         } catch (e) {
-            console.log(e.message);
+            console.log('Error: ' + e.message);
         }
-        console.log(this.state);
     }
 
-    handleAddProduct = user => {
-        // const {addItemRequest} = this.props;
-        // addItemRequest(id);
-        console.log(user);
-        const {navigation} = this.props;
-        navigation.navigate('Cart', user);
+    handleAddProduct = prod => {
+        const {dispatch} = this.props;
+        // navigation.navigate('Cart', prod);
+
+        dispatch({
+            type: 'ADD_PRODUCT',
+            prod,
+        });
     };
 
     render() {
         const {products} = this.state;
         const {amount} = this.props;
+        // console.log(products);
+
         return (
             <Container>
                 <ProductsList
                     horizontal={true}
                     data={products}
-                    keyExtractor={user => user.login}
+                    keyExtractor={prod => String(prod.id)}
                     renderItem={({item}) => (
                         <Product>
                             <ProdImage source={{uri: item.image}} />
                             <Text>{item.title}</Text>
-                            <Text>{item.priceFormated}</Text>
+                            <Text>{item.formatedPrice}</Text>
                             <ProdButton
                                 onPress={() => this.handleAddProduct(item)}>
                                 <Icon name="add" size={20} color="#fff" />
@@ -65,4 +68,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default connect()(Home);
