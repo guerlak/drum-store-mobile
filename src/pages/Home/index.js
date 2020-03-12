@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, Text} from 'react-native';
+
 import api from '../../services/api';
 import {formatPrice} from '../../util/format';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Container, Product, ProductsList, ProdImage, ProdButton} from './style';
+import {
+    Container,
+    Product,
+    ProductsList,
+    ProdImage,
+    ProdButton,
+    GoToCartBtn,
+    TextGoToCartBtn,
+    ProdButtonText,
+} from './style';
 
 class Home extends Component {
     state = {
@@ -35,6 +45,10 @@ class Home extends Component {
             prod,
         });
     };
+    handleGoToCart = cart => {
+        const {navigation} = this.props;
+        navigation.navigate('Cart', cart);
+    };
 
     render() {
         const {products} = this.state;
@@ -56,13 +70,16 @@ class Home extends Component {
                                 onPress={() => this.handleAddProduct(item)}>
                                 <Icon name="add" size={20} color="#fff" />
                                 {/* {amount[item.id] || 0} */}
-                                <Text style={{color: '#fff'}}>
+                                <ProdButtonText>
                                     Adicionar ao carrinho
-                                </Text>
+                                </ProdButtonText>
                             </ProdButton>
                         </Product>
                     )}
                 />
+                <GoToCartBtn onPress={this.handleGoToCart}>
+                    <TextGoToCartBtn>Ver Carrinho</TextGoToCartBtn>
+                </GoToCartBtn>
             </Container>
         );
     }

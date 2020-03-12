@@ -22,4 +22,6 @@ export const Number = styled.Text`
 
 export const TitleLogo = styled.Text`
     color: #fff;
+    font-size: 20px;
+    font-weight: bold;
 `;

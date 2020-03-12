@@ -1,41 +1,71 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import {
     Container,
     ProdImage,
-    Header,
-    InfoHeader,
-    OrderBtn,
+    Product,
+    ProductsList,
+    Info,
     Total,
-    Quantity,
-    TextBtn,
+    Price,
+    ProductInfo,
+    AmountHandler,
+    Input,
+    TotalItem,
+    Footer,
+    Delete,
+    CartEmpty,
+    CartEmptyText,
 } from './style';
 
-const handleOrder = () => {
-    console.log('Order done!');
-};
+function Cart({cart}) {
+    // const {title, image, formatedPrice} = props.route.params;
 
-function Cart(props) {
-    const {title, image, formatedPrice} = props.route.params;
-    console.log(image);
-    return (
+    return cart.length ? (
         <Container>
-            <Header>
-                <ProdImage source={{uri: image}} />
-                <InfoHeader>
-                    <Text> {title}</Text>
-                    <Text> {formatedPrice}</Text>
-                </InfoHeader>
-                <Icon name="delete" size={20} />
-            </Header>
-            <Quantity></Quantity>
-            <Total></Total>
-            <OrderBtn onPress={handleOrder}>
-                <TextBtn>Finalizar Pedido</TextBtn>
-            </OrderBtn>
+            <ProductsList
+                data={cart}
+                keyExtractor={prod => String(prod.id)}
+                renderItem={({item}) => (
+                    <Product>
+                        <ProductInfo>
+                            <ProdImage source={{uri: item.image}} />
+                            <Info>
+                                <Text>{item.title}</Text>
+                                <Price>{item.formatedPrice}</Price>
+                            </Info>
+                        </ProductInfo>
+                        <AmountHandler>
+                            <Icon name="add-circle-outline" size={25} />
+                            <Input value="32" />
+                            <Icon name="remove-circle-outline" size={25} />
+                            <TotalItem>R$ 1.928,00</TotalItem>
+                        </AmountHandler>
+                        <Delete>
+                            <Icon name="delete" size={25} color="#ccc" />
+                        </Delete>
+                    </Product>
+                )}
+            />
+            <Footer>
+                <Total>Total: R$ 1.200,00</Total>
+            </Footer>
         </Container>
+    ) : (
+        <CartEmpty>
+            <Icon name="remove-shopping-cart" size={50} color="#ccc" />
+            <CartEmptyText>No Items in the Cart</CartEmptyText>
+        </CartEmpty>
     );
 }
 
-export default Cart;
+const mapStateToProps = state => {
+    return {
+        cart: state.cart,
+    };
+};
+
+export default connect(mapStateToProps)(Cart);
