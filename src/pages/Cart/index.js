@@ -1,7 +1,8 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Actions from '../../store/modules/Cart/actions';
 
 import {
     Container,
@@ -21,8 +22,17 @@ import {
     CartEmptyText,
 } from './style';
 
-function Cart({cart}) {
-    // const {title, image, formatedPrice} = props.route.params;
+function Cart({cart, dispatch}) {
+    const handleDelete = id => {
+        dispatch(Actions.deleteFromCart(id));
+    };
+
+    const handleAddAmount = id => {
+        dispatch(Actions.addAmount(id));
+    };
+    const handleReduceAmount = id => {
+        dispatch(Actions.reduceAmount(id));
+    };
 
     return cart.length ? (
         <Container>
@@ -39,13 +49,26 @@ function Cart({cart}) {
                             </Info>
                         </ProductInfo>
                         <AmountHandler>
-                            <Icon name="add-circle-outline" size={25} />
-                            <Input value="32" />
-                            <Icon name="remove-circle-outline" size={25} />
+                            <Icon
+                                name="add-circle-outline"
+                                size={25}
+                                onPress={() => handleAddAmount(item.id)}
+                            />
+                            <Input value={String(item.amount)} />
+                            <Icon
+                                name="remove-circle-outline"
+                                size={25}
+                                onPress={() => handleReduceAmount(item.id)}
+                            />
                             <TotalItem>R$ 1.928,00</TotalItem>
                         </AmountHandler>
                         <Delete>
-                            <Icon name="delete" size={25} color="#ccc" />
+                            <Icon
+                                name="delete"
+                                size={25}
+                                color="#ccc"
+                                onPress={() => handleDelete(item.id)}
+                            />
                         </Delete>
                     </Product>
                 )}

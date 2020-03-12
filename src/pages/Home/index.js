@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
-
+import {Text} from 'react-native';
 import api from '../../services/api';
 import {formatPrice} from '../../util/format';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -45,6 +44,7 @@ class Home extends Component {
             prod,
         });
     };
+
     handleGoToCart = cart => {
         const {navigation} = this.props;
         navigation.navigate('Cart', cart);
@@ -69,7 +69,7 @@ class Home extends Component {
                             <ProdButton
                                 onPress={() => this.handleAddProduct(item)}>
                                 <Icon name="add" size={20} color="#fff" />
-                                {/* {amount[item.id] || 0} */}
+
                                 <ProdButtonText>
                                     Adicionar ao carrinho
                                 </ProdButtonText>
