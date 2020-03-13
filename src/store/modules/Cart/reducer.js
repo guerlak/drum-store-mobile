@@ -1,18 +1,11 @@
-import {formatPrice} from '../../../util/format';
-
 export default function cart(state = [], action) {
+    console.log(action);
     switch (action.type) {
-        case 'ADD_PRODUCT':
-            const product = action.prod;
-            let prodIndex = state.findIndex(p => p.id === product.id);
+        case '@cart/ADD_SUCESS':
+            return [...state, {...action.prod}];
 
-            if (prodIndex !== -1 || prodIndex > 0) {
-                return state;
-            } else {
-                return [...state, {...product, amount: 1}];
-            }
         case 'DELETE_PRODUCT':
-            prodIndex = state.findIndex(el => el.id === action.id);
+            let prodIndex = state.findIndex(el => el.id === action.id);
             state.splice(prodIndex, 1);
 
             return [...state];
@@ -21,6 +14,11 @@ export default function cart(state = [], action) {
             prodIndex = state.findIndex(el => el.id === action.id);
             state[prodIndex].amount++;
 
+            return [...state];
+
+        case '@cart/UPDATE_SUCESS':
+            prodIndex = state.findIndex(el => el.id === action.id);
+            state[prodIndex] = action.amount;
             return [...state];
 
         case 'REDUCE_AMOUNT':

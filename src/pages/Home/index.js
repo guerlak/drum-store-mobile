@@ -4,6 +4,7 @@ import {Text} from 'react-native';
 import api from '../../services/api';
 import {formatPrice} from '../../util/format';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Actions from '../../store/modules/Cart/actions';
 import {
     Container,
     Product,
@@ -35,14 +36,9 @@ class Home extends Component {
         }
     }
 
-    handleAddProduct = prod => {
+    handleAddProduct = id => {
         const {dispatch} = this.props;
-        // navigation.navigate('Cart', prod);
-
-        dispatch({
-            type: 'ADD_PRODUCT',
-            prod,
-        });
+        dispatch(Actions.addToCartRequest(id));
     };
 
     handleGoToCart = cart => {
@@ -67,7 +63,7 @@ class Home extends Component {
                             <Text>{item.title}</Text>
                             <Text>{item.formatedPrice}</Text>
                             <ProdButton
-                                onPress={() => this.handleAddProduct(item)}>
+                                onPress={() => this.handleAddProduct(item.id)}>
                                 <Icon name="add" size={20} color="#fff" />
 
                                 <ProdButtonText>

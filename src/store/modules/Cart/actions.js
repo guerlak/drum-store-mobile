@@ -1,25 +1,33 @@
-exports.deleteFromCart = id => {
+exports.addToCartRequest = id => {
     return {
-        type: 'DELETE_PRODUCT',
+        type: '@cart/ADD_REQUEST',
         id,
     };
 };
-
-exports.addToCart = prod => {
+exports.addToCartSucess = prod => {
+    console.log('suuucesooo');
     return {
-        type: 'ADD_PRODUCT',
+        type: '@cart/ADD_SUCESS',
         prod,
     };
 };
-exports.addAmount = id => {
+exports.updateAmount = (id, amount) => {
     return {
-        type: 'ADD_AMOUNT',
+        type: '@cart/UPDATE_AMOUNT',
+        amount,
         id,
     };
 };
 exports.reduceAmount = id => {
     return {
         type: 'REDUCE_AMOUNT',
+        id,
+    };
+};
+
+exports.deleteFromCart = id => {
+    return {
+        type: 'DELETE_PRODUCT',
         id,
     };
 };
