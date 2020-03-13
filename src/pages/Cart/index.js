@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Actions from '../../store/modules/Cart/actions';
+import {formatPrice} from '../../util/format';
 
 import {
     Container,
@@ -22,7 +23,7 @@ import {
     CartEmptyText,
 } from './style';
 
-function Cart({cart, dispatch}) {
+function Cart({cart, dispatch, total}) {
     const handleDelete = id => {
         dispatch(Actions.deleteFromCart(id));
     };
@@ -50,17 +51,17 @@ function Cart({cart, dispatch}) {
                         </ProductInfo>
                         <AmountHandler>
                             <Icon
-                                name="add-circle-outline"
-                                size={25}
-                                onPress={() => handleAddAmount(item.id)}
-                            />
-                            <Input value={String(item.amount)} />
-                            <Icon
                                 name="remove-circle-outline"
                                 size={25}
                                 onPress={() => handleReduceAmount(item.id)}
                             />
-                            <TotalItem>R$ 1.928,00</TotalItem>
+                            <Input value={String(item.amount)} />
+                            <Icon
+                                name="add-circle-outline"
+                                size={25}
+                                onPress={() => handleAddAmount(item.id)}
+                            />
+                            <TotalItem>{item.subTotal}</TotalItem>
                         </AmountHandler>
                         <Delete>
                             <Icon
@@ -74,7 +75,7 @@ function Cart({cart, dispatch}) {
                 )}
             />
             <Footer>
-                <Total>Total: R$ 1.200,00</Total>
+                <Total>Total: {total}</Total>
             </Footer>
         </Container>
     ) : (
@@ -87,7 +88,13 @@ function Cart({cart, dispatch}) {
 
 const mapStateToProps = state => {
     return {
-        cart: state.cart,
+        cart: state.cart.map(prod => ({
+            ...prod,
+            subTotal: formatPrice(prod.price * prod.amount),
+        })),
+        total: formatPrice(
+            state.cart.reduce((acc, current) => acc + current.price, 0),
+        ),
     };
 };
 
