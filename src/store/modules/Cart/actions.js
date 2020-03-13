@@ -4,30 +4,32 @@ exports.addToCartRequest = id => {
         id,
     };
 };
-exports.addToCartSucess = prod => {
+exports.addToCartSuccess = prod => {
     console.log('suuucesooo');
     return {
-        type: '@cart/ADD_SUCESS',
+        type: '@cart/ADD_SUCCESS',
         prod,
     };
 };
-exports.updateAmount = (id, amount) => {
+exports.updateAmountRequest = (id, amount) => {
     return {
-        type: '@cart/UPDATE_AMOUNT',
+        type: '@cart/UPDATE_AMOUNT_REQUEST',
         amount,
         id,
     };
 };
-exports.reduceAmount = id => {
+
+exports.updateAmountSuccess = (id, amount) => {
     return {
-        type: 'REDUCE_AMOUNT',
+        type: '@cart/UPDATE_AMOUNT_SUCCESS',
+        amount,
         id,
     };
 };
 
 exports.deleteFromCart = id => {
     return {
-        type: 'DELETE_PRODUCT',
+        type: '@cart/DELETE_PRODUCT',
         id,
     };
 };

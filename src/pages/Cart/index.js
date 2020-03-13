@@ -28,12 +28,15 @@ function Cart({cart, dispatch, total}) {
         dispatch(Actions.deleteFromCart(id));
     };
 
-    const handleAddAmount = id => {
-        dispatch(Actions.addAmount(id));
-    };
-    const handleReduceAmount = id => {
-        dispatch(Actions.reduceAmount(id));
-    };
+    function increment(id, amount) {
+        amount = amount + 1;
+        dispatch(Actions.updateAmountRequest(id, amount));
+    }
+
+    function decrement(id, amount) {
+        amount = amount - 1;
+        dispatch(Actions.updateAmountRequest(id, amount));
+    }
 
     return cart.length ? (
         <Container>
@@ -53,13 +56,13 @@ function Cart({cart, dispatch, total}) {
                             <Icon
                                 name="remove-circle-outline"
                                 size={25}
-                                onPress={() => handleReduceAmount(item.id)}
+                                onPress={() => decrement(item.id, item.amount)}
                             />
                             <Input value={String(item.amount)} />
                             <Icon
                                 name="add-circle-outline"
                                 size={25}
-                                onPress={() => handleAddAmount(item.id)}
+                                onPress={() => increment(item.id, item.amount)}
                             />
                             <TotalItem>{item.subTotal}</TotalItem>
                         </AmountHandler>
