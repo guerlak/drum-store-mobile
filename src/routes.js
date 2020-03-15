@@ -7,15 +7,24 @@ import Cart from './pages/Cart';
 
 const Stack = createStackNavigator();
 
-function getHeaderTitle(route) {
-    return route.params.user.name;
-}
-
 const Routes = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} headerMode="none" />
+                <Stack.Screen
+                    name="Home"
+                    component={Home}
+                    options={{
+                        title: 'My home',
+                        headerStyle: {
+                            backgroundColor: '#f4511e',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                    }}
+                />
                 <Stack.Screen name="Cart" component={Cart} />
             </Stack.Navigator>
         </NavigationContainer>

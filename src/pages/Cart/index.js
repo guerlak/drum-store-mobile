@@ -14,7 +14,8 @@ import {
     Total,
     Price,
     ProductInfo,
-    AmountHandler,
+    AmountInfo,
+    InputArea,
     Input,
     TotalItem,
     Footer,
@@ -52,20 +53,27 @@ function Cart({cart, dispatch, total}) {
                                 <Price>{item.formatedPrice}</Price>
                             </Info>
                         </ProductInfo>
-                        <AmountHandler>
-                            <Icon
-                                name="remove-circle-outline"
-                                size={25}
-                                onPress={() => decrement(item.id, item.amount)}
-                            />
-                            <Input value={String(item.amount)} />
-                            <Icon
-                                name="add-circle-outline"
-                                size={25}
-                                onPress={() => increment(item.id, item.amount)}
-                            />
+                        <AmountInfo>
+                            <InputArea>
+                                <Icon
+                                    name="remove-circle-outline"
+                                    size={25}
+                                    onPress={() =>
+                                        decrement(item.id, item.amount)
+                                    }
+                                />
+                                <Input value={String(item.amount)} />
+                                <Icon
+                                    name="add-circle-outline"
+                                    size={25}
+                                    onPress={() =>
+                                        increment(item.id, item.amount)
+                                    }
+                                />
+                            </InputArea>
+
                             <TotalItem>{item.subTotal}</TotalItem>
-                        </AmountHandler>
+                        </AmountInfo>
                         <Delete>
                             <Icon
                                 name="delete"
@@ -97,7 +105,10 @@ const mapStateToProps = state => {
             formatedPrice: formatPrice(prod.price),
         })),
         total: formatPrice(
-            state.cart.reduce((acc, current) => acc + current.price, 0),
+            state.cart.reduce(
+                (acc, current) => acc + current.price * current.amount,
+                0,
+            ),
         ),
     };
 };

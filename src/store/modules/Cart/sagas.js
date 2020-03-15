@@ -21,7 +21,6 @@ function* updateAmount({id, amount}) {
     if (amount <= 0) {
         return;
     }
-
     const response = yield call(api.get, '5e67121dff85de370f672ccd');
     const stock = response.data.stock;
     const index = stock.findIndex(p => p.id === id);
@@ -32,7 +31,6 @@ function* updateAmount({id, amount}) {
         );
         return;
     }
-
     yield put(updateAmountSuccess(id, amount));
 }
 

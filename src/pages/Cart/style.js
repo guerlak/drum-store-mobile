@@ -1,15 +1,13 @@
 import styled from 'styled-components/native';
 import {RectButton} from 'react-native-gesture-handler';
 
-export const Container = styled.View`
-    align-items: center;
-`;
+export const Container = styled.View``;
 
 export const ProductsList = styled.FlatList.attrs({
     showsVerticalScrollIndicator: false,
 })`
     margin-top: 20px;
-    max-height: 350px;
+    max-height: 90%;
 `;
 
 export const ProdImage = styled.Image`
@@ -17,16 +15,18 @@ export const ProdImage = styled.Image`
     width: 90px;
 `;
 export const Info = styled.View`
-    margin-left: 20px;
+    margin-left: 30px;
+    justify-content: center;
 `;
-export const ProductInfo = styled.View`
-    flex-direction: row;
+
+export const Product = styled.View`
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #fff;
     padding: 5px;
 `;
-export const Product = styled.View`
+export const ProductInfo = styled.View`
+    flex-direction: row;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #fff;
@@ -37,6 +37,7 @@ export const TextBtn = styled.Text`
     font-weight: bold;
     color: #fff;
 `;
+
 export const Price = styled.Text`
     font-weight: bold;
     color: #999;
@@ -49,12 +50,19 @@ export const TotalItem = styled.Text`
     margin-left: 50px;
 `;
 
-export const AmountHandler = styled.View`
+export const AmountInfo = styled.View`
     background-color: #eee;
     flex-direction: row;
     align-items: center;
     padding: 5px;
     justify-content: space-evenly;
+`;
+
+export const InputArea = styled.View`
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
 `;
 
 export const Input = styled.TextInput`
